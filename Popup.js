@@ -16,6 +16,13 @@
                     if (event.key === 'Escape') {
                         this.close();
                     }
+                },
+                closeBtn: () => {
+                    this.$wrap.addEventListener("click", (ev) => {
+                        if (ev.target.dataset.close) {
+                            this.close();
+                        }
+                    });
                 }
             }
         }
@@ -29,6 +36,7 @@
             this.isClosing = false;
 
             this.addTitle();
+            this.handlers.closeBtn()
 
             if (content !== null && typeof content === "string") {
                 if (content.indexOf("/") >= 0 || ajax === true) {
@@ -63,16 +71,6 @@
                 $contentWrap.removeChild($contentWrap.querySelector(".popup__title"));
             } else {
                 $contentWrap.querySelector(".popup__title").innerHTML = this.options.title;
-            }
-        }
-
-        get handlers() {
-            return {
-                escape: (event) => {
-                    if (event.key === 'Escape') {
-                        this.close();
-                    }
-                }
             }
         }
 
