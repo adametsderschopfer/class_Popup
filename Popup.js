@@ -10,6 +10,16 @@
             this.init(this.options);
         }
 
+        get handlers() {
+            return {
+                escape: (event) => {
+                    if (event.key === 'Escape') {
+                        this.close();
+                    }
+                }
+            }
+        }
+
         init({content = undefined, ajax}) {
             if (content === undefined) {
                 this.$promise = Promise.reject('Content Type Not Supported');
@@ -181,4 +191,9 @@
     }
 
     window.legacyPopup = (params = {}) => new Popup(params);
+
+    window.legacyPopupInit = (params) => {
+        params = typeof params === "object" ? params : {};
+        Popup.defaultParams = Object.assign({}, Popup.defaultParams, params);
+    };
 })(window);
