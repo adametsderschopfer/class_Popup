@@ -2,40 +2,81 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-  <style>
-    .page {
-      width: 100%;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
+    <style>
+        .page {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
 
-    .page__wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
-  </style>
+        .page__wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        ._popup {
+            display: none;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10;
+            background: rgba(0,0,0,0.3);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup.popup_open {
+            display: flex;
+        }
+
+        .popup__wrap {
+            max-width: 500px;
+            color: #fff;
+            background: rgba(0,0,0,0.8);
+            padding: 25px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body class="page">
-  <div class="page__wrapper">
+<div class="page__wrapper">
     <h1 class="page__title">Example popup</h1>
     <button class="page__popup-open">Open popup</button>
-  </div>
+</div>
+
+<div class="_popup"><h1>Lorem ipsum dolor sit amet.</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consectetur dolorum perspiciatis? Adipisci
+        quasi quisquam sapiente tempora! Architecto assumenda corporis eveniet ratione rem reprehenderit vero?</p></div>
 
 
-  <script src="./Popup.js"></script>
-  <script>
+<script src="./Popup.js"></script>
+<script>
+    const $btn = document.querySelector('.page__popup-open');
+    const $popup = document.querySelector('._popup')
+    const examplePopup = legacyPopup({
+        content: $popup,
+    });
 
-  </script>
+    $btn.addEventListener('click', () => {
+        examplePopup.open()
+    })
+</script>
 </body>
 
 </html>
