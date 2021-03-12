@@ -136,9 +136,14 @@
 
             wrap.innerHTML = `
                 <div class="popup__wrap">
-                    <svg class="popup__logo-fixed" width="64" height="16" viewBox="0 0 128 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g fill="#FF005C"><path fill-rule="evenodd" clip-rule="evenodd" d="M119 18h-13v10h13a5 5 0 000-10zm-17-4v18h17a9 9 0 009-9 9 9 0 00-9-9h-17z"/><path d="M126 0h-24v32h4V4h20V0z"/></g><g fill="#FF005C"><path d="M94 0v32h-4V18H70v14h-4V0h4v14h20V0h4z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M44 28c6.627 0 12-5.373 12-12S50.627 4 44 4 32 9.373 32 16s5.373 12 12 12zm0 4c8.837 0 16-7.163 16-16S52.837 0 44 0 28 7.163 28 16s7.163 16 16 16z"/><path d="M22 0L8 14H4V0H0v32h4V18h4l14 14 2.82-2.82L11.64 16 24.82 2.82 22 0z"/></g></svg>
-                      <div class="popup__close" data-close="true"><span class="popup__close_1"></span><span class="popup__close_2"></span></div>
-                    <div class="popup__content-wrap"><h3 class="popup__title"></h3></div>
+                  <div class="popup__content-wrap">
+                    <div class="popup__close" data-close="true">
+                      <span class="popup__close_1"></span>
+                      <span class="popup__close_2"></span>
+                    </div>
+
+                   <h3 class="popup__title"></h3>
+                  </div>
                 </div>
                 `;
 
