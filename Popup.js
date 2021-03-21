@@ -11,7 +11,7 @@
                 throw SyntaxError('Object with parameters not specified')
             }
 
-            this.init(this.options);
+            this.#init(this.options);
         }
 
         get handlers() {
@@ -31,7 +31,7 @@
             }
         }
 
-        init({content = undefined, ajax}) {
+        #init({content = undefined, ajax}) {
             if (content === undefined) {
                 this.$promise = Promise.reject('Content Type Not Supported');
             }
