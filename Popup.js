@@ -4,6 +4,9 @@
             isAjax: false,
         };
 
+        $fetching = false;
+        $open = false;
+
         constructor(params) {
             if (params instanceof Object) {
                 this.options = Object.assign({}, Popup.defaultParams, params);
@@ -47,6 +50,10 @@
                     this.#state.isAjax = true;
 
                     this.$promise = (noFetch = false) => {
+                        if (!noFetch) {
+                            this.$fetching = true;
+                        }
+
                         return noFetch ? Promise.resolve() : fetch(content).then(
                             (value) => (value.ok ? value.text() : "404 Not found"),
                             (error) => "Check your internet connection"
@@ -84,6 +91,9 @@
         }
 
         open() {
+            if (this.$open)
+                return;
+
             function showPopup() {
                 !this.isClosing && this.$wrap.classList.add("popup_open");
 
@@ -99,6 +109,8 @@
             }
 
             if (this.$promise !== undefined && this.$promise?.then !== undefined || this.$promise instanceof Function) {
+                this.$open = true;
+
                 const openThen = [(result) => {
                     this.$contentWrap.querySelector('.popup__content').insertAdjacentHTML("beforeend", result);
 
@@ -115,14 +127,18 @@
                         console.log(error);
                     }]
 
+                const _finally = () => {
+                    this.$fetching = false;
+                }
+
                 if (this.#state.isAjax) {
                     this.$promise().then(
                         ...openThen
-                    )
+                    ).finally(_finally)
                 } else
                     this.$promise.then(
                         ...openThen
-                    );
+                    ).finally(_finally);
             }
 
             return Promise.resolve();
@@ -130,6 +146,7 @@
 
         close() {
             this.isClosing = true;
+            this.$open = false;
 
             this.$wrap.classList.remove("popup_open");
             this.$wrap.classList.add("popup_hide");
